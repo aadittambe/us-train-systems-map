@@ -1,0 +1,20 @@
+city,length,date_started,locally_called,stations,lat,lon
+New York,380.2,27 Oct 1904,Subway,473,40.6971494,-74.2598655
+Washington,189.9,27 Mar 1976,Metrorail,95,38.8936708,-77.1546599
+San Francisco,174.6,11 Sep 1972,BART,45,37.7576793,-122.5076399
+Chicago,166.0,6 Jun 1892,"""L""",153,41.8336478,-87.8720475
+Atlanta,79.2,30 Jun 1979,MARTA,39,33.7676338,-84.5606885
+Saint Louis,73.4,31 Jul 1993,Metrolink,37,38.6530169,-90.3835459
+Boston,67.7,1 Sep 1897,The T,67,42.3142647,-71.1103675
+Philadelphia,62.0,4 Mar 1907,Subway,66,40.0024137,-75.2581121
+Los Angeles,59.3,30 Jan 1993,Metro Rail,30,34.0201613,-118.6919191
+Miami,39.8,21 May 1984,Metrorail,23,25.7823907,-80.2994987
+Cleveland,31.0,15 Mar 1955,Rapid Transit,18,41.497447,-81.8459435
+Seattle,27.2,18 Jul 2009,Light Rail,16,47.6129432,-122.4821472
+Baltimore,24.5,21 Nov 1983,Metro Subway,14,39.2846854,-76.6905366
+Buffalo,8.4,18 May 1985,Metro Rail,8,42.8962176,-78.9344821
+Jacksonville,6.9,30 May 1989,Skyway,6,30.3446913,-81.9632952
+Las Vegas,6.2,15 Jul 2004,Monorail,7,36.1249185,-115.3150842
+Detroit,4.8,Jul 1987,People Mover,13,42.3526257,-83.2392885
+Pittsburgh,4.8,3 Jul 1985,T,6,40.4313473,-80.0505404
+Newark,2.2,26 May 1935,Light Rail,4,40.7312623,-74.2520952

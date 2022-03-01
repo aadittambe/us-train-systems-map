@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style type="text/css">
+        #container {
+            font-family: 'Roboto', sans-serif;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            padding-left: 20px;
+            padding-top: 10px;
+            padding-right: 20px;
+            padding-bottom: 10px;
+            border-left: 1px solid black;
+            border-bottom: 14pt solid black;
+            border-top: 1px solid black;
+            border-right: 1px solid black;
+            box-shadow: 5px 5px 10px gainsboro;
+            max-width: 960px;
+            height: auto;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        h1 {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        h2 {
+            font-size: 16px;
+            line-height: 22px;
+        }
+
+        h3 {
+            font-size: 16px;
+            line-height: 22px;
+        }
+
+        h4 {
+            line-height: 28px;
+        }
+
+        div.tooltip {
+            position: absolute;
+            text-align: center;
+            width: 200px;
+            height: 100px;
+            padding: 2px;
+            font: 16px sans-serif;
+            background: #e9e8ea;
+            border: solid 2px #666666;
+            border-radius: 3px;
+            pointer-events: none;
+            color: #0a0a0a;
+            text-align: center;
+        }
+
+        body {
+            font: 11px sans-serif;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div id="container">
+        <h1>While Los Angeles and Chicago are the second two most populous cities in the US, Washington and San
+            Fransisco have two of the longest train systems after New York City.</h1>
+        <h3>BY AADIT TAMBE</h3>
+        <h2>Map shows the 19 longest train systems in the U.S.
+        </h2>
+        <div id="viz"></div>
+        <h3>
+            Source: Analysis of<a href="http://mic-ro.com/metro/table.html"> Metrobits.org</a> world metro database
+            data.
+        </h3>
+    </div>
+
+    <script type="text/javascript" src="script.js">
+
+        var width = 960;
+        var height = 500;
+
+        var projection = d3.geo.albersUsa()
+            .translate([width / 2, height / 2])
+            .scale([1000]);
+
+        var path = d3.geo.path()
+            .projection(projection);
+
+        var color = d3.scale.linear()
+            .range(["rgb(213,222,217)", "rgb(69,173,168)", "rgb(84,36,55)", "rgb(217,91,67)"]);
+
+        var legendText = ["Cities Lived", "States Lived", "States Visited", "Nada"];
+
+        var svg = d3.select("#viz")
+            .append("svg")
+            .attr("width", width)
+            .attr("height", height);
+
+        var div = d3.select("#viz")
+            .append("div")
+            .attr("class", "tooltip")
+            .style("opacity", 0);
+
+        d3.json("us-states.json", function (json) {
+            console.log(json.features)
+
+            svg.selectAll("path")
+                .data(json.features)
+                .enter()
+                .append("path")
+                .attr("d", path)
+                .style("stroke", "#fff")
+                .style("stroke-width", "1")
+                .style("fill", "#e9e8ea")
+
+            d3.csv("trains.csv", function (data) {
+
+                svg.selectAll("circle")
+                    .data(data)
+                    .enter()
+                    .append("circle")
+                    .attr("cx", function (d) {
+                        return projection([d.lon, d.lat])[0];
+                    })
+                    .attr("cy", function (d) {
+                        return projection([d.lon, d.lat])[1];
+                    })
+                    .attr("r", function (d) {
+                        return Math.sqrt(d.length) * 4;
+                    })
+                    .style("fill", "#de5826")
+                    .style("opacity", 0.5)
+                    .on("mouseover", function (d, i) {
+                        d3.select(this)
+                            .style("stroke", "#990000")
+                            .style("stroke-width", "10px")
+                            .style("opacity", .9)
+                        div.transition()
+                            .duration(200)
+                            .style("opacity", .9);
+                        div.text("The train system in " + d.city + ", locally called the " + d.locally_called + ", is " + d.length + " kilometers long, and was founded on " + d.date_started + ".")
+                            .style("left", (d3.event.pageX) + "px")
+                            .style("top", (d3.event.pageY - 28) + "px");
+                    })
+                    .on("mouseout", function (d) {
+                        d3.select(this)
+                            .style("stroke", "none")
+                            .style("opacity", .4)
+                        div.transition()
+                            .duration(500)
+                            .style("opacity", 0);
+                    });
+            });
+
+        });
+    </script>
+</body>
+
+</html>
