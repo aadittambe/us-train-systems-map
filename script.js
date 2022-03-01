@@ -69,6 +69,40 @@ d3.json("us-states.json", function (json) {
                     .duration(500)
                     .style("opacity", 0);
             });
+
+        var legend = svg.append("g")
+            .attr("class", "legend")
+            .attr("transform", "translate(" + (width - 120) + "," + (height - 150) + ")")
+            .selectAll("g")
+            .data([400, 62])
+            .enter().append("g");
+
+        legend.append("circle")
+            .attr("cy", function (d) { return 28; })
+            .attr("r", function (d) {
+                // return 30
+                console.log(d)
+                return Math.sqrt(d) * 4
+            });
+
+        legend.append("text")
+            .style("text-align", "center")
+            .attr("y", "20%")
+            .attr("x", "-2.5%")
+            .text('400 km')
+            .style("font-size", "16px");
+
+        legend.append("text")
+            .attr("y", "7%")
+            .attr("x", "-2%")
+            .text('62 km')
+            .style("font-size", "16px");
+
+        legend.append("text")
+            .attr("y", "28%")
+            .attr("x", "-5.5%")
+            .text('Distance legend')
+            .style("font-size", "16px");
     });
 
 });
@@ -78,3 +112,4 @@ d3.json("us-states.json", function (json) {
 // US states map: https://gist.github.com/michellechandra/0b2ce4923dc9b5809922
 // D3 tooltip: http://www.d3noob.org/2013/01/adding-tooltips-to-d3js-graph.html
 // Map projection and translate: https://makeshiftinsights.com/blog/basic-maps-with-d3/
+// D3 legend: https://bost.ocks.org/mike/bubble-map/

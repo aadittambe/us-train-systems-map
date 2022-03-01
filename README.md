@@ -8,3 +8,4 @@ Thank you to the following resources that helped me create this map:
 - [US States map](https://gist.github.com/michellechandra/0b2ce4923dc9b5809922)
 - [D3 tooltip](http://www.d3noob.org/2013/01/adding-tooltips-to-d3js-graph.html)
 - [Map projection and translate](https://makeshiftinsights.com/blog/basic-maps-with-d3/)
+- [D3 legend](https://bost.ocks.org/mike/bubble-map/)
